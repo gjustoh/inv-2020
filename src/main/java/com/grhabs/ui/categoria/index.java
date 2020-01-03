@@ -1,4 +1,4 @@
-package com.grhabs.ui.categorias;
+package com.grhabs.ui.categoria;
 
 import com.grhabs.backend.data.Categoria;
 import com.grhabs.backend.services.CategoriaService;
