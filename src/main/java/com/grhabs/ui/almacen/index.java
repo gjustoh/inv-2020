@@ -13,10 +13,10 @@ import java.util.List;
 
 @Route(value="almacen")
 public class index extends VerticalLayout {
-
+    Grid<Almacen> grid = new Grid<>(Almacen.class);
     @Autowired
     public index(AlmacenService almacenService) {
-        Grid<Almacen> grid = new Grid<>(Almacen.class);
+
         grid.setColumns();
         grid.addColumn("idmovimiento");
         grid.addColumn("iddirectorio");
@@ -30,7 +30,7 @@ public class index extends VerticalLayout {
         grid.addColumn("pedido");
         grid.addColumn("factura");
         grid.addColumn("fechafactura");
-
+        grid.getColumns().forEach(col->col.setAutoWidth(true));
         grid.setItems(almacenService.findAll());
         add(grid);
     }

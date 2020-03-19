@@ -1,0 +1,20 @@
+/* List view */
+.list-view .contenido {
+    display: flex; /*  */
+}
+
+.list-view .directorio-grid {
+    flex: 2; /*  */
+}
+
+.list-view form-view {
+    flex: 1;
+    padding: var(--lumo-space-m); /*  */
+}
+
+@media all and (max-width: 1100px) { /*  */
+    .list-view.editing .toolbar,
+    .list-view.editing .directorio-grid {
+        display: none;
+    }
+}
