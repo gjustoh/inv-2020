@@ -67,6 +67,12 @@
         </dependency>
  <!--.....................................................-->
 
+<!--................dependencia Barra de menu.......................-->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-app-layout-flow</artifactId>
+        </dependency>
+<!--.....................................................-->
 <!--................dependencia Mysql....................-->
         <dependency>
             <groupId>mysql</groupId>
