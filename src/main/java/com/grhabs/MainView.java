@@ -19,13 +19,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.server.PWA;
 
 import java.awt.*;
 
 
-@Route(value="pruebaMenu")
+@Route(value="")
+@PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
 public class MainView extends VerticalLayout implements RouterLayout {
-    AppLayout apps =new AppLayout("AppLayout Addon for Vaadin 10 Demo");
     private VerticalLayout container = new VerticalLayout();
     private final AppLayout app = new AppLayout(createLogoImage(), createAvatarComponent(), "Inventario");
     private final ToolbarIconButton miSettings = new ToolbarIconButton("Settings", "settings", this::openSettings);
@@ -116,8 +117,6 @@ public class MainView extends VerticalLayout implements RouterLayout {
 
     private Component[] createMenuItems() {
 
-        MenuItem miHello = new MenuItem("More content", () -> showContent("Hello!")).setIcon("settings");
-
         MenuItem miToggleSettings = new MenuItem().setIcon("settings");
         miToggleSettings.setCommand(() -> toggleSettings(miToggleSettings));
         toggleSettings(miToggleSettings);
@@ -125,12 +124,7 @@ public class MainView extends VerticalLayout implements RouterLayout {
         this.getElement().getStyle().set("--icon-spacing", "normal");
 
         return new Component[] {
-               new MenuItem("Content", VaadinIcon.BOOK)
-                        .setCommand(MouseClickEvent.MouseButton.MIDDLE, ()->{
-                    getUI().ifPresent(ui->ui.getPage().executeJs("window.open(window.location.href, '_blank')"));
-                }),
-                miToggleSettings,
-                miHello,
+               miToggleSettings,
                 new MenuItem("Almacen", VaadinIcon.STORAGE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("almacen")),
                 new MenuItem("Categoria", VaadinIcon.INDENT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("categoria")),
                 new MenuItem("Directorio", VaadinIcon.PHONE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("directorio")),
@@ -140,16 +134,7 @@ public class MainView extends VerticalLayout implements RouterLayout {
                 new MenuItem("Presentacion", VaadinIcon.BUTTON, () -> com.vaadin.flow.component.UI.getCurrent().navigate("presentacion")),
                 new MenuItem("producto", VaadinIcon.ARCHIVE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("producto")),
                 new MenuItem("Usuario", VaadinIcon.USER, () -> com.vaadin.flow.component.UI.getCurrent().navigate("usuario")), //icon as string
-                new MenuItem("Clear Items", "clear", () -> app.clearMenuItems()),
-                new MenuItem("Change Text & Icon", "cloud", () -> {
-                    if (miHello.getIcon().equals("star")) {
-                        miHello.setIcon("cloud");
-                        miHello.setLabel("Say hello modified");
-                    } else {
-                        miHello.setIcon("star");
-                        miHello.setLabel("Say hello");
-                    }
-                }),
+//                new MenuItem("Clear Items", "clear", () -> app.clearMenuItems()),
                 new MenuItem("SubMenu")
                         .setIcon("build")
                         .add(
@@ -160,23 +145,6 @@ public class MainView extends VerticalLayout implements RouterLayout {
                                 .add(new MenuItem("And Again",()->showContent("And Again!")))
                 ),
 
-                new MenuSeparator("Separator"),
-
-                new MenuItem("Item 1"),
-                new MenuItem("Item 2"),
-                new MenuItem("Item 3"),
-                new MenuItem("Item 4"),
-                new MenuItem("Item 5"),
-                new MenuItem("Item 6"),
-
-                new MenuSeparator(),
-
-                new MenuItem("Item 7"),
-                new MenuItem("Item 8"),
-                new MenuItem("Item 9"),
-                new MenuItem("Item 10"),
-                new MenuItem("Item 11"),
-                new MenuItem("Item 12")
         };
     }
 
