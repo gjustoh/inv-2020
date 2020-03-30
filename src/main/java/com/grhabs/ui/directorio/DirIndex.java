@@ -1,5 +1,6 @@
 package com.grhabs.ui.directorio;
 
+import com.grhabs.MainView;
 import com.grhabs.backend.data.Categoria;
 import com.grhabs.backend.data.Directorio;
 import com.grhabs.backend.services.CategoriaService;
@@ -12,14 +13,14 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
-@Route(value="directorio")
+@Route(value="directorio", layout = MainView.class)
 @CssImport("./styles/shared-styles.css")
-public class index extends VerticalLayout {
+public class DirIndex extends VerticalLayout {
     private final DirectorioForm form;
     Grid<Directorio> grid = new Grid<>(Directorio.class);
     TextField filterText = new TextField();
     DirectorioService directorioService = new DirectorioService();
-    public index(DirectorioService directorioService) {
+    public DirIndex(DirectorioService directorioService) {
         this.directorioService = directorioService;
         addClassName("list-view");
         setSizeFull();

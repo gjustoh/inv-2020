@@ -1,22 +1,23 @@
-package com.grhabs.ui.factura;
+package com.grhabs.ui.pago;
 
+import com.grhabs.MainView;
 import com.grhabs.backend.data.Categoria;
-import com.grhabs.backend.data.Factura;
+import com.grhabs.backend.data.Pago;
 import com.grhabs.backend.services.CategoriaService;
-import com.grhabs.backend.services.FacturaService;
+import com.grhabs.backend.services.PagoService;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route(value="factura")
-public class index extends VerticalLayout {
+@Route(value="pago", layout = MainView.class)
+public class PagIndex extends VerticalLayout {
 
-    public index(FacturaService facturaService) {
-        Grid<Factura> grid = new Grid<>(Factura.class);
+    public PagIndex(PagoService pagoService) {
+        Grid<Pago> grid = new Grid<>(Pago.class);
 //        grid.setColumns();
 //        grid.addColumn("idcategoria").setHeader("ID");
 //        grid.addColumn("categoria").setHeader("Nombre");
-        grid.setItems(facturaService.findAll());
+        grid.setItems(pagoService.findAll());
         add(grid);
     }
 

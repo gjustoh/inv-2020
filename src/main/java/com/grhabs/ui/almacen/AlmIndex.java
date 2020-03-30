@@ -1,5 +1,6 @@
 package com.grhabs.ui.almacen;
 
+import com.grhabs.MainView;
 import com.grhabs.backend.data.Almacen;
 import com.grhabs.backend.services.AlmacenService;
 import com.vaadin.flow.component.grid.Grid;
@@ -11,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
 
-@Route(value="almacen")
-public class index extends VerticalLayout {
+@Route(value="almacen", layout = MainView.class)
+public class AlmIndex extends VerticalLayout {
     Grid<Almacen> grid = new Grid<>(Almacen.class);
     @Autowired
-    public index(AlmacenService almacenService) {
+    public AlmIndex(AlmacenService almacenService) {
 
         grid.setColumns();
         grid.addColumn("idmovimiento");

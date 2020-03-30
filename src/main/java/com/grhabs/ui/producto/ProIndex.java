@@ -1,22 +1,23 @@
-package com.grhabs.ui.pago;
+package com.grhabs.ui.producto;
 
+import com.grhabs.MainView;
 import com.grhabs.backend.data.Categoria;
-import com.grhabs.backend.data.Pago;
+import com.grhabs.backend.data.Producto;
 import com.grhabs.backend.services.CategoriaService;
-import com.grhabs.backend.services.PagoService;
+import com.grhabs.backend.services.ProductoService;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route(value="pago")
-public class index extends VerticalLayout {
+@Route(value="producto", layout = MainView.class)
+public class ProIndex extends VerticalLayout {
 
-    public index(PagoService pagoService) {
-        Grid<Pago> grid = new Grid<>(Pago.class);
+    public ProIndex(ProductoService productoService) {
+        Grid<Producto> grid = new Grid<>(Producto.class);
 //        grid.setColumns();
 //        grid.addColumn("idcategoria").setHeader("ID");
 //        grid.addColumn("categoria").setHeader("Nombre");
-        grid.setItems(pagoService.findAll());
+        grid.setItems(productoService.findAll());
         add(grid);
     }
 
