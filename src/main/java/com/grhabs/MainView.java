@@ -1,76 +1,191 @@
 package com.grhabs;
 
-import com.github.appreciated.app.layout.addons.notification.component.NotificationButton;
-import com.github.appreciated.app.layout.component.appbar.AppBarBuilder;
-import com.github.appreciated.app.layout.component.applayout.LeftLayouts;
-import com.github.appreciated.app.layout.component.builder.AppLayoutBuilder;
-import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder;
-import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem;
-import com.github.appreciated.app.layout.component.menu.left.items.LeftSectionItem;
-import com.github.appreciated.app.layout.component.router.AppLayoutRouterLayout;
 
-import com.grhabs.ui.almacen.AlmIndex;
-import com.grhabs.ui.categoria.CatIndex;
-import com.grhabs.ui.directorio.DirIndex;
-import com.grhabs.ui.factura.FactIndex;
-import com.grhabs.ui.pago.PagIndex;
-import com.grhabs.ui.pedido.PedIndex;
-import com.grhabs.ui.presentacion.PreIndex;
-import com.grhabs.ui.producto.ProIndex;
-import com.grhabs.ui.usuario.UserIndex;
-import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.flowingcode.addons.applayout.*;
+import com.flowingcode.addons.applayout.MenuItem;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
-
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
-import static com.github.appreciated.app.layout.entity.Section.HEADER;
-import static com.github.appreciated.app.layout.entity.Section.FOOTER;
+import com.vaadin.flow.router.RouterLayout;
 
-@Route(value="")
-@PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
-public class MainView extends AppLayoutRouterLayout<LeftLayouts.LeftResponsive> {
+import java.awt.*;
 
-    private LeftNavigationItem arti;
+
+@Route(value="pruebaMenu")
+public class MainView extends VerticalLayout implements RouterLayout {
+    AppLayout apps =new AppLayout("AppLayout Addon for Vaadin 10 Demo");
+    private VerticalLayout container = new VerticalLayout();
+    private final AppLayout app = new AppLayout(createLogoImage(), createAvatarComponent(), "Inventario");
+    private final ToolbarIconButton miSettings = new ToolbarIconButton("Settings", "settings", this::openSettings);
+
     public MainView() {
-        LeftNavigationItem menu;menu = new LeftNavigationItem("menu",VaadinIcon.ENTER,DefaultView.class);
-        arti = new LeftNavigationItem("Articulos", VaadinIcon.BOOK.create(), DefaultView.class);
-        init(AppLayoutBuilder.get(LeftLayouts.LeftResponsive.class)
-                .withAppBar(AppBarBuilder.get().add(new DrawerToggle())
-                .add(new Image("img/logo.png", "logo"))
-                .build())
-                .withTitle("sd")
-                .withAppBar(AppBarBuilder.get()
-                        .build())
-                .withAppMenu(LeftAppMenuBuilder.get()
-                        .addToSection(HEADER,
-                                new LeftSectionItem("COMISOFTWARE")//,
-                                //new LeftClickableItem("Clickable Entry", VaadinIcon.COG.create(), clickEvent -> Notification.show("onClick ..."))
-                        ).add(new LeftNavigationItem("Almacen",VaadinIcon.ENTER, AlmIndex.class),
-                                new LeftNavigationItem("Categoria",VaadinIcon.ENTER, CatIndex.class),
-                                new LeftNavigationItem("Directorio",VaadinIcon.ENTER, DirIndex.class),
-                                new LeftNavigationItem("Factura",VaadinIcon.ENTER, FactIndex.class),
-                                new LeftNavigationItem("Pago",VaadinIcon.ENTER, PagIndex.class),
-                                new LeftNavigationItem("Pedido",VaadinIcon.ENTER, PedIndex.class),
-                                new LeftNavigationItem("Presentacion",VaadinIcon.ENTER, PreIndex.class),
-                                new LeftNavigationItem("producto",VaadinIcon.ENTER, ProIndex.class),
-                                new LeftNavigationItem("Usuario",VaadinIcon.ENTER, UserIndex.class),
-                                new LeftNavigationItem("prueba",VaadinIcon.ENTER,DefaultView.class),menu
-                        )
-                        .addToSection(FOOTER, new LeftClickableItem("Clickable Entry", VaadinIcon.COG.create(), clickEvent -> Notification.show("onClick ..."))).build()).build());
+        container.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
+        container.setSizeFull();
+
+        this.setPadding(true);
+        this.setSpacing(true);
+        this.setMargin(true);
+
+        app.setMenuItems(createMenuItems());
+
+        app.setToolbarIconButtons(miSettings);
+        this.add(app, container);
+
+
+
+    }
+
+
+    private void openSettings() {
+        Dialog dialog = new Dialog();
+        H3 title = new H3("Demo settings");
+        title.getStyle().set("margin-top", "0");
+        dialog.add(title);
+
+        Checkbox cbMenuVisible = new Checkbox("Menu visible");
+        Checkbox cbSwipeOpen = new Checkbox("Swipe Open");
+        Checkbox cbFixed = new Checkbox("Fixed");
+        Checkbox cbReveals = new Checkbox("Reveals");
+        Checkbox cbCompact = new Checkbox("Compact");
+
+        cbMenuVisible.getElement().setAttribute("title", "Toggle visibility of the hamburguer icon.");
+        cbSwipeOpen.getElement().setAttribute("title", "When enabled, you can open the menu by swiping the left border of the screen.");
+        cbFixed.getElement().setAttribute("title", "When enabled, the header is fixed at the top so it never moves away.");
+        cbReveals.getElement().setAttribute("title", "When enabled, the header slides back when scrolling back up.");
+        cbCompact.getElement().setAttribute("title", "When enabled, the height of the header is set to 32px.");
+
+        VerticalLayout content = new VerticalLayout(
+                cbMenuVisible,
+                cbSwipeOpen,
+                cbFixed,
+                cbReveals,
+                cbCompact);
+        content.setSpacing(false);
+
+        HorizontalLayout buttons = new HorizontalLayout();
+        Button btnOk = new Button("OK", ev -> {
+            dialog.close();
+        });
+
+        Button btnCancel = new Button("Cancel", ev -> dialog.close());
+        btnOk.getElement().setAttribute("theme", "primary");
+        buttons.setSpacing(true);
+        buttons.add(btnOk, btnCancel);
+        buttons.setSpacing(true);
+
+        dialog.add(content, buttons);
+        dialog.setSizeUndefined();
+        dialog.open();
+    }
+
+    private Image createLogoImage() {
+        Image img = new Image("img/log.png","subacom");
+        img.setHeight("50px");
+        img.addClassName("applogo");
+        return img;
+    }
+
+    private Component createAvatarComponent() {
+        Div container = new Div();
+        container.getElement().setAttribute("style", "text-align: center;");
+        Image img = new Image("/frontend/images/avatar.png","avatar");
+        img.getStyle().set("width", "80px");
+        img.getStyle().set("margin-top", "20px");
+        H4 h4 = new H4("User");
+        container.add(img,h4);
+        return container;
+    }
+
+    private void toggleSettings(MenuItem toggleSettings) {
+
+        app.setToolbarIconButtons(miSettings);
+           toggleSettings.setLabel("Enable settings");
+    }
+
+    private Component[] createMenuItems() {
+
+        MenuItem miHello = new MenuItem("More content", () -> showContent("Hello!")).setIcon("settings");
+
+        MenuItem miToggleSettings = new MenuItem().setIcon("settings");
+        miToggleSettings.setCommand(() -> toggleSettings(miToggleSettings));
+        toggleSettings(miToggleSettings);
+
+        this.getElement().getStyle().set("--icon-spacing", "normal");
+
+        return new Component[] {
+               new MenuItem("Content", VaadinIcon.BOOK)
+                        .setCommand(MouseClickEvent.MouseButton.MIDDLE, ()->{
+                    getUI().ifPresent(ui->ui.getPage().executeJs("window.open(window.location.href, '_blank')"));
+                }),
+                miToggleSettings,
+                miHello,
+                new MenuItem("Almacen", VaadinIcon.STORAGE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("almacen")),
+                new MenuItem("Categoria", VaadinIcon.INDENT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("categoria")),
+                new MenuItem("Directorio", VaadinIcon.PHONE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("directorio")),
+                new MenuItem("Factura", VaadinIcon.INVOICE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("factura")),
+                new MenuItem("Pago", VaadinIcon.MONEY_DEPOSIT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("pago")),
+                new MenuItem("Pedido", VaadinIcon.CLIPBOARD_TEXT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("pedido")),
+                new MenuItem("Presentacion", VaadinIcon.BUTTON, () -> com.vaadin.flow.component.UI.getCurrent().navigate("presentacion")),
+                new MenuItem("producto", VaadinIcon.ARCHIVE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("producto")),
+                new MenuItem("Usuario", VaadinIcon.USER, () -> com.vaadin.flow.component.UI.getCurrent().navigate("usuario")), //icon as string
+                new MenuItem("Clear Items", "clear", () -> app.clearMenuItems()),
+                new MenuItem("Change Text & Icon", "cloud", () -> {
+                    if (miHello.getIcon().equals("star")) {
+                        miHello.setIcon("cloud");
+                        miHello.setLabel("Say hello modified");
+                    } else {
+                        miHello.setIcon("star");
+                        miHello.setLabel("Say hello");
+                    }
+                }),
+                new MenuItem("SubMenu")
+                        .setIcon("build")
+                        .add(
+                        new MenuItem("Hello Again", "inbox", ()->showContent("Hello Again!")),
+                        new MenuItem("And Again",()->showContent("And Again!")),
+                        new MenuItem("SubMenu")
+                                .add(new MenuItem("Hello Again",()->showContent("Hello Again!")))
+                                .add(new MenuItem("And Again",()->showContent("And Again!")))
+                ),
+
+                new MenuSeparator("Separator"),
+
+                new MenuItem("Item 1"),
+                new MenuItem("Item 2"),
+                new MenuItem("Item 3"),
+                new MenuItem("Item 4"),
+                new MenuItem("Item 5"),
+                new MenuItem("Item 6"),
+
+                new MenuSeparator(),
+
+                new MenuItem("Item 7"),
+                new MenuItem("Item 8"),
+                new MenuItem("Item 9"),
+                new MenuItem("Item 10"),
+                new MenuItem("Item 11"),
+                new MenuItem("Item 12")
+        };
+    }
+
+    private void showContent(String content) {
+        container.setClassName("");
+        container.removeAll();
+        H3 label = new H3();
+        label.setSizeFull();
+        label.setText(content);
 
     }
 }
-
-@Route(value = "default", layout = MainView.class)
-class DefaultView extends Div {
-    public DefaultView() {
-        add(new Span("Default view content"));
-    }
-}
-

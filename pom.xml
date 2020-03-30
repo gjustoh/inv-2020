@@ -80,7 +80,12 @@
             <version>4.0.0.rc5</version>
         </dependency>
         <!--.....................................................-->
-<!--................dependencia Mysql....................-->
+        <dependency>
+            <groupId>com.flowingcode.addons.applayout</groupId>
+            <artifactId>app-layout-addon</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!--................dependencia Mysql....................-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
