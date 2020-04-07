@@ -1,11 +1,12 @@
 package com.grhabs.backend.data;
 
+
 /**
  * 
  * @author toby troyano
  * Create at 2020-04-07 13:22
  */
-public class Usuario {
+public class Proveedor {
 
     /**
      * 
@@ -15,7 +16,7 @@ public class Usuario {
     /**
      * 
      */
-    private Integer rolId;
+    private Integer direccionId;
 
     /**
      * 
@@ -25,32 +26,27 @@ public class Usuario {
     /**
      * 
      */
-    private String apellidos;
+    private String logoUrl;
 
     /**
      * 
      */
-    private String direccion;
+    private String descripcion;
 
     /**
      * 
      */
-    private String telefono;
+    private String tipo;
+
+    /**
+     * 
+     */
+    private String websiteUrl;
 
     /**
      * 
      */
     private String email;
-
-    /**
-     * 
-     */
-    private String password;
-
-    /**
-     * 
-     */
-    private String skinUrl;
 
     /**
      * 

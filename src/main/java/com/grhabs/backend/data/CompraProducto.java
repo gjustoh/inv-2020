@@ -1,11 +1,13 @@
 package com.grhabs.backend.data;
 
+import java.time.OffsetDateTime;
+
 /**
  * 
  * @author toby troyano
  * Create at 2020-04-07 13:22
  */
-public class Usuario {
+public class CompraProducto {
 
     /**
      * 
@@ -15,42 +17,27 @@ public class Usuario {
     /**
      * 
      */
-    private Integer rolId;
+    private Integer compraId;
 
     /**
      * 
      */
-    private String nombre;
+    private Integer productoId;
 
     /**
      * 
      */
-    private String apellidos;
+    private OffsetDateTime fecha;
 
     /**
      * 
      */
-    private String direccion;
+    private Integer cantidad;
 
     /**
      * 
      */
-    private String telefono;
-
-    /**
-     * 
-     */
-    private String email;
-
-    /**
-     * 
-     */
-    private String password;
-
-    /**
-     * 
-     */
-    private String skinUrl;
+    private Object montounitario;
 
     /**
      * 

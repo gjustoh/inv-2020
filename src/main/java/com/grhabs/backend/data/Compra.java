@@ -6,7 +6,7 @@ package com.grhabs.backend.data;
  * @author toby troyano
  * Create at 2020-04-07 13:22
  */
-public class Pedido {
+public class Compra {
 
     /**
      * 
@@ -21,22 +21,17 @@ public class Pedido {
     /**
      * 
      */
-    private Integer clienteId;
+    private Integer proveedorId;
 
     /**
      * 
      */
-    private Integer cantidad;
+    private String descripcion;
 
     /**
      * 
      */
-    private Object descuento;
-
-    /**
-     * 
-     */
-    private Object pbruto;
+    private Object monto;
 
     /**
      * 
