@@ -12,9 +12,9 @@ public class CategoriaService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    public List<Categoria> findAll(){
+   /* public List<Categoria> findAll(){
         return jdbcTemplate.query("SELECT  * FROM categorias",(rs, rowNum) ->new Categoria(rs.getInt("idcategoria"),rs.getString("categoria")));
     }
     public CategoriaService() {
-    }
+    }*/
 }

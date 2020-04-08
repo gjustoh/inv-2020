@@ -21,21 +21,21 @@ public class Distrito {
     /**
      * 
      */
-    private String provinciaId;
+    private String provincia_id;
 
     /**
      * 
      */
-    private String departamentoId;
+    private String departamento_id;
 
     public Distrito() {
     }
 
-    public Distrito(String id, String nombre, String provinciaId, String departamentoId) {
+    public Distrito(String id, String nombre, String provincia_id, String departamento_id) {
         this.id = id;
         this.nombre = nombre;
-        this.provinciaId = provinciaId;
-        this.departamentoId = departamentoId;
+        this.provincia_id = provincia_id;
+        this.departamento_id = departamento_id;
     }
 
     public String getId() {
@@ -54,19 +54,19 @@ public class Distrito {
         this.nombre = nombre;
     }
 
-    public String getProvinciaId() {
-        return provinciaId;
+    public String getProvincia_id() {
+        return provincia_id;
     }
 
-    public void setProvinciaId(String provinciaId) {
-        this.provinciaId = provinciaId;
+    public void setProvincia_id(String provincia_id) {
+        this.provincia_id = provincia_id;
     }
 
-    public String getDepartamentoId() {
-        return departamentoId;
+    public String getDepartamento_id() {
+        return departamento_id;
     }
 
-    public void setDepartamentoId(String departamentoId) {
-        this.departamentoId = departamentoId;
+    public void setDepartamento_id(String departamento_id) {
+        this.departamento_id = departamento_id;
     }
 }

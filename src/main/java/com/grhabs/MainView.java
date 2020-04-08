@@ -135,10 +135,10 @@ public class MainView extends VerticalLayout implements RouterLayout {
                 new MenuItem("producto", VaadinIcon.ARCHIVE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("producto")),
                 new MenuItem("Usuario", VaadinIcon.USER, () -> com.vaadin.flow.component.UI.getCurrent().navigate("usuario")), //icon as string
 //                new MenuItem("Clear Items", "clear", () -> app.clearMenuItems()),
-                new MenuItem("SubMenu")
+                new MenuItem("Ubigeo")
                         .setIcon("build")
                         .add(
-                        new MenuItem("Hello Again", "inbox", ()->showContent("Hello Again!")),
+                        new MenuItem("Distritos", "inbox",()->com.vaadin.flow.component.UI.getCurrent().navigate("distritos")),
                         new MenuItem("And Again",()->showContent("And Again!")),
                         new MenuItem("SubMenu")
                                 .add(new MenuItem("Hello Again",()->showContent("Hello Again!")))

@@ -6,12 +6,12 @@ public class Almacen {
     private int id;
     private  String  name;
     private int direccion_id;
-    private float estado;
+    private String estado;
 
     public Almacen() {
     }
 
-    public Almacen(int id, String name, int direccion_id, float estado) {
+    public Almacen(int id, String name, int direccion_id, String estado) {
         this.id = id;
         this.name = name;
         this.direccion_id = direccion_id;
@@ -42,11 +42,11 @@ public class Almacen {
         this.direccion_id = direccion_id;
     }
 
-    public float getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(float estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 }

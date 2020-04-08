@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
 
                 // Permitir todas las solicitudes de usuarios registrados.
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
 
                 //Configurando la pagina de inicio

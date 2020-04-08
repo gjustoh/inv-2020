@@ -11,6 +11,7 @@ public class AlmacenService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     public List<Almacen> findAll(){
-        return jdbcTemplate.query("SELECT * FROM almacen",(rs,rowColum)->new Almacen(rs.getInt("idmovimiento"),rs.getInt("iddirectorio"),rs.getInt("idproducto"),rs.getFloat("cantidad"),rs.getInt("idpresentacion"),rs.getDate("fecha"),rs.getInt("entrada"),rs.getInt("salida"),rs.getInt("idpedido"),rs.getInt("pedido"),rs.getInt("factura"),rs.getDate("fechafactura")));
+        return jdbcTemplate.query("SELECT * FROM almacen",(rs,rowColum)->new Almacen(rs.getInt("id"),rs.getString("name"),rs.getInt("direccion_id"),rs.getString("estado")));
+
     }
 }

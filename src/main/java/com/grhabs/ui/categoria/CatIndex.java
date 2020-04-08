@@ -15,7 +15,7 @@ public class CatIndex extends VerticalLayout {
         grid.setColumns();
         grid.addColumn("idcategoria").setHeader("ID");
         grid.addColumn("categoria").setHeader("Nombre");
-        grid.setItems(categoriaService.findAll());
+//        grid.setItems(categoriaService.findAll());
         add(grid);
     }
 
