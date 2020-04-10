@@ -129,7 +129,7 @@ public class MainView extends VerticalLayout implements RouterLayout {
                 new MenuItem("Categoria", VaadinIcon.INDENT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("categoria")),
                 new MenuItem("Directorio", VaadinIcon.PHONE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("directorio")),
                 new MenuItem("Factura", VaadinIcon.INVOICE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("factura")),
-                new MenuItem("Pago", VaadinIcon.MONEY_DEPOSIT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("pago")),
+                new MenuItem("atributo", VaadinIcon.MONEY_DEPOSIT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("atributo")),
                 new MenuItem("Pedido", VaadinIcon.CLIPBOARD_TEXT, () -> com.vaadin.flow.component.UI.getCurrent().navigate("pedido")),
                 new MenuItem("Presentacion", VaadinIcon.BUTTON, () -> com.vaadin.flow.component.UI.getCurrent().navigate("presentacion")),
                 new MenuItem("producto", VaadinIcon.ARCHIVE, () -> com.vaadin.flow.component.UI.getCurrent().navigate("producto")),

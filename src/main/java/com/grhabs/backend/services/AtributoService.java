@@ -11,8 +11,9 @@ import java.util.List;
 public class AtributoService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-//    private List<Atributo> findAll(){
-//        return jdbcTemplate.query("SELECT * FROM atributo")
-//
-//    }
+    public List<Atributo> findAll(){
+        return jdbcTemplate.query("SELECT * FROM atributo",(rs,rowNum)->new Atributo(rs.getInt("id"),rs.getString("name"),rs.getString("estado")));
+//        return jdbcTemplate.query("SELECT * FROM atributo",(rs,rowNum)->new Atributo());
+
+    }
 }

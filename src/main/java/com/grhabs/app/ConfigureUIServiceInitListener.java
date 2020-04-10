@@ -11,6 +11,7 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
     public void serviceInit(ServiceInitEvent serviceInitEvent) {
         serviceInitEvent.getSource().addUIInitListener(uiInitEvent -> {
             final UI ui = uiInitEvent.getUI();
+            //ui.add(new OfflineBaner());
             ui.addBeforeEnterListener(this::beforeEnter);
         });
     }
@@ -22,9 +23,15 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
      *          antes del evento de navegación con detalles del evento
      */
     private void beforeEnter(BeforeEnterEvent event) {
-        if (!login.class.equals(event.getNavigationTarget()) //
-                && !SecurityUtils.isUserLoggedIn()) { //
-            event.rerouteTo(login.class); //
+        final boolean accesootorgado = SecurityUtils.accesootorgado(event.getNavigationTarget());
+        if (!accesootorgado){ //
+                if (SecurityUtils.estaLogeado()){
+                    //event.rerouteTo();
+                    System.out.println("errorrrrrrrrrrrrrrrrrrrrr");
+                }
+                else {
+                    event.rerouteTo(login.class); //
+                }
         }
     }
 }

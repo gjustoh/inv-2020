@@ -1,58 +1,61 @@
 package com.grhabs.ui.login;
 
-import com.vaadin.flow.component.button.Button;
+import com.grhabs.MainView;
+import com.grhabs.app.CustomRequestCache;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
-import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.login.LoginI18n;
+import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.PasswordField;
-import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.dom.Element;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+
+import com.vaadin.flow.router.*;
 import com.vaadin.flow.component.UI;
+import  com.grhabs.app.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Collections;
-
 @PageTitle("Login")
 @Route(value = "login")
-@NpmPackage(value = "@polymer/iron-form", version = "3.0.1")
-@JsModule("@polymer/iron-form/iron-form.js")
-public class login extends VerticalLayout implements BeforeEnterObserver {
+public class login extends LoginOverlay implements AfterNavigationObserver, BeforeEnterObserver {
     public static final String ROUTE = "login";
+    @Autowired
     public login() {
-        TextField userNameTextField = new TextField();
-        userNameTextField.getElement().setAttribute("name", "username");
-        PasswordField passwordField = new PasswordField();
-        passwordField.getElement().setAttribute("name", "password");
-        Button submitButton = new Button("Login");
-        submitButton.setId("submitbutton");
-        UI.getCurrent().getPage().executeJs("document.getElementById('submitbutton').addEventListener('click', () => document.getElementById('ironform').submit());");
-
-        FormLayout formLayout = new FormLayout();
-        formLayout.add(userNameTextField, passwordField, submitButton);
-
-        Element formElement = new Element("form");
-        formElement.setAttribute("method", "post");
-        formElement.setAttribute("action", "login");
-        formElement.appendChild(formLayout.getElement());
-
-        Element ironForm = new Element("iron-form");
-        ironForm.setAttribute("id", "ironform");
-        ironForm.setAttribute("allow-redirect", true);
-        ironForm.appendChild(formElement);
-
-        getElement().appendChild(ironForm);
-
-        setClassName("login-view");
+        // configures login dialog and adds it to the main view
+        LoginI18n i18n = LoginI18n.createDefault();
+        i18n.setHeader(new LoginI18n.Header());
+        i18n.getHeader().setTitle("Sistema de inventario");
+        i18n.getHeader().setDescription(
+                "admin@vaadin.com + admin\n" + "barista@vaadin.com + barista");
+        i18n.setAdditionalInformation(null);
+        i18n.setForm(new LoginI18n.Form());
+        i18n.getForm().setSubmit("Sign in");
+        i18n.getForm().setTitle("Sign in");
+        i18n.getForm().setUsername("Email");
+        i18n.getForm().setPassword("Password");
+        setI18n(i18n);
+        setForgotPasswordButtonVisible(false);
+        setAction("login");
     }
-    @Override
-    public void beforeEnter(BeforeEnterEvent event){
-        if (!event.getLocation().getQueryParameters().getParameters().getOrDefault("error", Collections.emptyList()).isEmpty()){
-            getElement().setProperty("error", true);
-        }
 
+    @Override
+    public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
+        setError(
+                afterNavigationEvent.getLocation().getQueryParameters().getParameters().containsKey(
+                        "error"
+                )
+        );
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+        if (SecurityUtils.estaLogeado()){
+            beforeEnterEvent.forwardTo(MainView.class);
+        }
     }
 }
