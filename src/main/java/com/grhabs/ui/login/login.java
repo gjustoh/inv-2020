@@ -1,37 +1,27 @@
 package com.grhabs.ui.login;
 
 import com.grhabs.MainView;
-import com.grhabs.app.CustomRequestCache;
-import com.vaadin.flow.component.Tag;
+
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-
+import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.*;
-import com.vaadin.flow.component.UI;
 import  com.grhabs.app.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.util.Collections;
-@PageTitle("Login")
+@PageTitle("login")
 @Route(value = "login")
+@JsModule("./styles/shared-styles.js")
+@Viewport("width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
 public class login extends LoginOverlay implements AfterNavigationObserver, BeforeEnterObserver {
-    public static final String ROUTE = "login";
     @Autowired
     public login() {
         // configures login dialog and adds it to the main view
         LoginI18n i18n = LoginI18n.createDefault();
         i18n.setHeader(new LoginI18n.Header());
         i18n.getHeader().setTitle("Sistema de inventario");
-        i18n.getHeader().setDescription(
-                "admin@vaadin.com + admin\n" + "barista@vaadin.com + barista");
+        i18n.getHeader().setDescription("SubaCom");
         i18n.setAdditionalInformation(null);
         i18n.setForm(new LoginI18n.Form());
         i18n.getForm().setSubmit("Sign in");
@@ -39,8 +29,9 @@ public class login extends LoginOverlay implements AfterNavigationObserver, Befo
         i18n.getForm().setUsername("Email");
         i18n.getForm().setPassword("Password");
         setI18n(i18n);
-        setForgotPasswordButtonVisible(false);
+        setForgotPasswordButtonVisible(true);
         setAction("login");
+        getElement().setVisible(true);
     }
 
     @Override

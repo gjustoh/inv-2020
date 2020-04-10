@@ -24,7 +24,7 @@ import com.vaadin.flow.server.PWA;
 import java.awt.*;
 
 
-@Route(value="")
+@Route(value="index")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
 public class MainView extends VerticalLayout implements RouterLayout {
     private VerticalLayout container = new VerticalLayout();
