@@ -48,5 +48,8 @@ public class login extends LoginOverlay implements AfterNavigationObserver, Befo
         if (SecurityUtils.estaLogeado()){
             beforeEnterEvent.forwardTo(MainView.class);
         }
+        else{
+            setOpened(true);
+        }
     }
 }
